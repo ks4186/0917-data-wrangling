@@ -1,0 +1,90 @@
+---
+title: "data import"
+output: github_document
+---
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+library(readxl)
+library(haven)
+```
+
+This document will show how to import data.
+
+# Import the FAS data litters CSV
+
+```{r}
+litters_df = read_csv("data/FAS_litters.csv")
+
+litters_df = janitor::clean_names(litters_df)
+```
+
+# Look at the dataset
+```{r}
+litters_df
+
+head(litters_df)
+tail(litters_df, 10)
+```
+
+## Look at read_csv option
+
+```{r}
+litters_df
+  read_csv(
+    file = "data/FAS_litters.csv",
+    skip = 2
+  )
+```
+
+what about missing data.
+
+```{r}
+litters_df =
+  read_csv(
+    file = "data/FAS_litters.csv",
+    na = c(".", "NA", "")
+  )
+
+litters_df = janitor::clean_names(litters_df)
+
+pull(litters_df, gd0_weight)
+
+```
+
+what if we code "group" as a factor variable?
+
+```{r}
+litters_df = 
+  read_csv(
+    file = "data/FAS_litters.csv",
+    na = c(".", "NA", ""),
+    col_types = cols(
+      Group = col_factor()
+    )
+  )
+```
+
+##import an excel files
+
+Import MLB 2011 summary
+
+```{r}
+mlb_df = read_excel("data/mlb11.xlsx", sheet = "mlb11")
+```
+
+## import SAS data
+```{r}
+pulse_df = read_sas("data/public_pulse_data.sas7bdat")
+```
+
+
+
+
+
+
+
+
+
+
+
