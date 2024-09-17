@@ -80,7 +80,16 @@ pulse_df = read_sas("data/public_pulse_data.sas7bdat")
 
 
 
+## Never use read.csv()
 
+```{r}
+litters_df = read.csv()
+```
+
+Never do this either:
+```{r}
+litters_df$L
+```
 
 
 
